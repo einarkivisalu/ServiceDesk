@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ServiceDesk.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tickets</h1>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ticketModal">Create New</button>
+
+<!-- Modal -->
+<p>
+    @await Html.PartialAsync("_createTicket", new ServiceDesk.Models.Ticket())
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketTitle)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.TicketDate)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketProblem)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PrioritySortParm"]">@Html.DisplayNameFor(model => model.TicketPriority)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSortParm"]">@Html.DisplayNameFor(model => model.TicketStatus)</a>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketProblem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketPriority)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketStatus)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TicketId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TicketId">Details</a> |
+                    @*<a asp-action="Delete" asp-route-id="@item.TicketId">Delete</a> |*@
+                    <a asp-action="Close" asp-route-id="@item.TicketId">Close</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

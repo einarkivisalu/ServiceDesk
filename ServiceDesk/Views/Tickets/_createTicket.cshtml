@@ -1,0 +1,55 @@
+﻿@model ServiceDesk.Models.Ticket
+
+<div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ticketModalLabel">Create new ticket</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TicketTitle" class="control-label"></label>
+                        <input asp-for="TicketTitle" class="form-control" required />
+                        <span asp-validation-for="TicketTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TicketDate" class="control-label"></label>
+                        <input asp-for="TicketDate" class="form-control" required />
+                        <span asp-validation-for="TicketDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TicketProblem" class="control-label"></label>
+                        @Html.TextAreaFor(model => model.TicketProblem, new { @class = "form-control", @rows = 4, required = "required" })
+                        <span asp-validation-for="TicketProblem" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TicketPriority" class="control-label"></label>
+                        <select asp-for="TicketPriority" class="form-control" asp-items="Html.GetEnumSelectList<Priority>()"></select>
+                        <span asp-validation-for="TicketPriority" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TicketStatus" class="control-label"></label>
+                        <select asp-for="TicketStatus" class="form-control" asp-items="Html.GetEnumSelectList<Status>()">></select>
+                        <span asp-validation-for="TicketStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Close" class="btn btn-secondary" data-dismiss="modal" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
